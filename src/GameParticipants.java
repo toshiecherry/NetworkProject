@@ -14,4 +14,8 @@ public class GameParticipants {
 		}
 		return false;
 	}
+	
+	public int getIndex(String player){
+		return participants.indexOf(player);
+	}
 }

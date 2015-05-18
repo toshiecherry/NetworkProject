@@ -10,6 +10,13 @@ public class CardPiles {
 			thePiles[i] = new CardPile(); 
 		}
 	}
+	
+	public CardPile getPile(int i){
+		return thePiles[i];
+	}
 
+	public int length(){
+		return thePiles.length;
+	}
 	
 }
