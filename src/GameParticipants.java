@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/* 
+ * Lista med namn på deltagarna. Beroende på vart i listan namnet på en deltagare ligger får de ett index.
+ */
 public class GameParticipants {
 	private ArrayList<String> participants;
 

@@ -1,5 +1,7 @@
 package cards;
 
+import se.lth.cs.ptdc.cardGames.Card;
+
 public class CardPiles {
 	private CardPile[] thePiles;
 
@@ -17,6 +19,10 @@ public class CardPiles {
 
 	public int length(){
 		return thePiles.length;
+	}
+	
+	public synchronized Card getStartCards(){
+		return thePiles[0].drawCard();
 	}
 	
 }

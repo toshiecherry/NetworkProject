@@ -16,9 +16,10 @@ public class GameServer {
 			while (true) {
 				Socket connection = null;
 				CardPiles piles = new CardPiles();
+				GameParticipants participants = new GameParticipants();
 				try {
 					connection = server.accept();
-					Runnable task = new PlayerThread(connection, piles);
+					Runnable task = new PlayerThread(connection, piles, participants);
 					pool.submit(task);
 
 				} catch (IOException ex) {
