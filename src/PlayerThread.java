@@ -31,6 +31,7 @@ public class PlayerThread implements Runnable {
 
 	@Override
 	public void run() {
+		
 		try {
 			// System.out.println(connection.getInetAddress());
 			Writer out = new OutputStreamWriter(connection.getOutputStream());
