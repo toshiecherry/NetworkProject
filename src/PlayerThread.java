@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import cards.CardPiles;
 
-public class PlayerThread extends Thread {
+public class PlayerThread implements Runnable {
 	private Socket connection;
 	private boolean moreRequests;
 	private CardPiles piles;
