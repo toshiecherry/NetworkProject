@@ -2,17 +2,19 @@ package gui;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+
+import client.PlayerThread;
 
 public class GameMonitor {
-	private static final long serialVersionUID = 1L;
 
-	public GameMonitor() {
+	public GameMonitor(PlayerThread thread) {
 		JFrame frame = new JFrame("Bubblan");
 		frame.setName("Bubblan");
 		frame.setBounds(500, 100, 450, 300);
+		String name = JOptionPane.showInputDialog("Ange användarnamn");
+		thread.setPlayerName(name);
 		ButtonAndMessagePanel bottomPanel = new ButtonAndMessagePanel(this);
 		frame.add(bottomPanel, BorderLayout.SOUTH);
 
@@ -27,7 +29,4 @@ public class GameMonitor {
 	// statusLabel.setText(error);
 	// }
 
-	public static void main(String[] args) {
-		GameMonitor monitor = new GameMonitor();
-	}
 }

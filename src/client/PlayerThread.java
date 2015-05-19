@@ -1,3 +1,5 @@
+package client;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,6 +11,7 @@ import java.util.Scanner;
 import cards.CardHand;
 import cards.CardPile;
 import cards.CardPiles;
+import gui.GameMonitor;
 import se.lth.cs.ptdc.cardGames.Card;
 
 public class PlayerThread implements Runnable {
@@ -31,12 +34,11 @@ public class PlayerThread implements Runnable {
 
 	@Override
 	public void run() {
-		
+
 		try {
-			// System.out.println(connection.getInetAddress());
+			GameMonitor monitor = new GameMonitor(this);
 			Writer out = new OutputStreamWriter(connection.getOutputStream());
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			playerName = in.readLine();
 			connectedToGame = true;
 
 			while (connectedToGame) {
@@ -55,26 +57,27 @@ public class PlayerThread implements Runnable {
 																// kort till
 																// tråden.
 																// Metoden är
-																// synchroniced.
+																// synchronized.
 					}
-					
+
 					while (gameStarted) {
 						int command = 0;
-						int index = 0; //Vilket kort man ska ta bort
+						int index = 0; // Vilket kort man ska ta bort
 						switch (command) { // Göra om detta med actionListener
-						case 0: //När man tar upp kort
+						case 0: // När man tar upp kort
 							if (takePile.size() > 0) {
 								hand.addCard(takePile.drawCard());
 							}
 							break;
-						case 1: //När man slänger kort
+						case 1: // När man slänger kort
 							Card trashCard = hand.removeCard(index);
-							if(trashCard !=null){
+							if (trashCard != null) {
 								throwPile.addCard(trashCard);
 							}
 							break;
-						case 2: //Alltså när man får bubblan. Hur kollar man att alla tryckt bubblan?
-							completeHand = true; 
+						case 2: // Alltså när man får bubblan. Hur kollar man
+								// att alla tryckt bubblan?
+							completeHand = true;
 						}
 
 						// Kan k�ra syso hand tills vi har gui?
@@ -96,4 +99,9 @@ public class PlayerThread implements Runnable {
 			}
 		}
 	}
+
+	public void setPlayerName(String name) {
+		playerName = name;
+	}
+
 }

@@ -1,3 +1,4 @@
+package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -5,6 +6,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import cards.CardPiles;
+import client.GameParticipants;
+import client.PlayerThread;
 
 public class GameServer {
 	private static final int THREAD_COUNT = 4;
