@@ -1,28 +1,25 @@
 package gui;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GameMonitor extends JFrame {
+public class GameMonitor {
 	private static final long serialVersionUID = 1L;
 
 	public GameMonitor() {
-		setName("Bubblan");
-		setBounds(500, 100, 450, 300);
-		JButton[] buttons = new JButton[3];
-		buttons[0] = new JButton("Starta spelomgång");
-		buttons[1] = new JButton("Dra kort");
-		buttons[2] = new JButton("Avsluta spelomgång");
-		// ButtonAndMessagePanel panel = new ButtonAndMessagePanel(JButton,
-		// messageLabel, actionhandler);
-		JPanel bottomPanel = new JPanel();
-		// bottomPanel.add(panel, BorderLayout.SOUTH);
+		JFrame frame = new JFrame("Bubblan");
+		frame.setName("Bubblan");
+		frame.setBounds(500, 100, 450, 300);
+		ButtonAndMessagePanel bottomPanel = new ButtonAndMessagePanel(this);
+		frame.add(bottomPanel, BorderLayout.SOUTH);
 
-		pack();
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
-		setVisible(true);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setVisible(true);
 
 	}
 
