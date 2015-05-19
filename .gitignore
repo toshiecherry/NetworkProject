@@ -2,3 +2,4 @@
 bin/cards/CardDeck.class
 
 *.class
+/bin/

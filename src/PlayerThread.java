@@ -9,7 +9,7 @@ import java.util.Scanner;
 import cards.CardPile;
 import cards.CardPiles;
 
-public class PlayerThread extends Thread {
+public class PlayerThread implements Runnable {
 	private Socket connection;
 	private boolean moreRequests;
 	private CardPiles piles;
@@ -34,8 +34,8 @@ public class PlayerThread extends Thread {
 			moreRequests = true;
 			while (moreRequests) {
 				String input = in.readLine();
-				// Eller hur man nu kan läsa av namnet på spelaren på ett snyggt
-				// sätt
+				// Eller hur man nu kan lï¿½sa av namnet pï¿½ spelaren pï¿½ ett snyggt
+				// sï¿½tt
 				int i = player.getIndex(input);
 				takePile = piles.getPile(i);
 				if (piles.length() < i) {
@@ -47,17 +47,17 @@ public class PlayerThread extends Thread {
 				gameStarted = true;
 				while (gameStarted){
 					//Dra kort
-					//Kolla hur många kort som finns på handen
+					//Kolla hur mï¿½nga kort som finns pï¿½ handen
 					//If(takepile != empty)
 					//takePile.drawCard()
 					//hand.add(card)
 					
-					//Släng kort 
-					//Kolla hur många kort som finns på handen 
+					//Slï¿½ng kort 
+					//Kolla hur mï¿½nga kort som finns pï¿½ handen 
 					//throwPile.add(card) 
 					//Hand.remove(card)
 					
-					//Kan köra syso hand tills vi har gui? 
+					//Kan kï¿½ra syso hand tills vi har gui? 
 					//actionlistener? 
 					
 					
