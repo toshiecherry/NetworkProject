@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import client.PlayerThread;
+import server.PlayerThread;
 
 public class GameMonitor {
 
