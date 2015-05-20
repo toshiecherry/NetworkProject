@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import client.ClientHandler;
-import client.GameClient;
 
 public class GameMonitor {
 
