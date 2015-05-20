@@ -36,7 +36,6 @@ public class PlayerThread implements Runnable {
 	public void run() {
 
 		try {
-			GameMonitor monitor = new GameMonitor(this);
 			Writer out = new OutputStreamWriter(connection.getOutputStream());
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connectedToGame = true;
