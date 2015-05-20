@@ -14,7 +14,7 @@ public class GameMonitor {
 		JFrame frame = new JFrame("Bubblan");
 		frame.setName("Bubblan");
 		frame.setBounds(500, 100, 450, 300);
-		String name = JOptionPane.showInputDialog("Ange användarnamn");
+		String name = JOptionPane.showInputDialog("Select username");
 		handler.setPlayerName(name);
 		ButtonAndMessagePanel bottomPanel = new ButtonAndMessagePanel(this);
 		frame.add(bottomPanel, BorderLayout.SOUTH);
