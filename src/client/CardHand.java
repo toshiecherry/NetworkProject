@@ -1,4 +1,4 @@
-package cards;
+package client;
 
 import se.lth.cs.ptdc.cardGames.Card;
 

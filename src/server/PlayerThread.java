@@ -8,9 +8,9 @@ import java.io.Writer;
 import java.net.Socket;
 import java.util.Scanner;
 
-import cards.CardHand;
 import cards.CardPile;
 import cards.CardPiles;
+import client.CardHand;
 import gui.GameMonitor;
 import se.lth.cs.ptdc.cardGames.Card;
 
