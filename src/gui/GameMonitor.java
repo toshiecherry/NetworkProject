@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import client.GameClient;
+
 public class GameMonitor {
 
 	public GameMonitor() {
@@ -12,6 +14,8 @@ public class GameMonitor {
 		frame.setName("Bubblan");
 		frame.setBounds(500, 100, 450, 300);
 		String name = JOptionPane.showInputDialog("Ange användarnamn");
+		
+//		thread.setPlayerName(name);
 		ButtonAndMessagePanel bottomPanel = new ButtonAndMessagePanel(this);
 		frame.add(bottomPanel, BorderLayout.SOUTH);
 
