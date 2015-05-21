@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.net.Socket;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import client.CardHand;
@@ -24,7 +23,7 @@ public class GameMonitor {
 			handler.setPlayerName(name);
 			ClientSender sender = new ClientSender(socket);
 			bottomPanel = new ButtonAndMessagePanel(this, sender, cardHand);
-			UpperPanel upperPanel = new UpperPanel(this, sender);
+			UpperPanel upperPanel = new UpperPanel(this, sender, cardHand);
 			CardString[][] field = new CardString[1][5];
 			CardGrid middlePanel = new CardGrid(1, 5, field);
 			frame.setLayout(new BorderLayout());
@@ -39,7 +38,7 @@ public class GameMonitor {
 		}
 	}
 
-	public static void errorMessage(String error) {
+	public void errorMessage(String error) {
 		bottomPanel.setText(error);
 	}
 

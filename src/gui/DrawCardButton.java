@@ -9,6 +9,7 @@ import client.CardHand;
 import client.ClientSender;
 import se.lth.cs.ptdc.cardGames.Card;
 
+@SuppressWarnings("serial")
 public class DrawCardButton extends JButton implements ActionListener {
 	private GameMonitor monitor;
 	private ClientSender sender;
@@ -29,7 +30,7 @@ public class DrawCardButton extends JButton implements ActionListener {
 		if (newCard != null) {
 			hand.addCard(newCard);
 		} else {
-			
+			monitor.errorMessage("Pile is empty");
 		}
 	}
 }

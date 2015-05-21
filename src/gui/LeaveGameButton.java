@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import client.ClientSender;
 
+@SuppressWarnings("serial")
 public class LeaveGameButton extends JButton implements ActionListener {
 	private GameMonitor monitor;
 
@@ -19,7 +20,7 @@ public class LeaveGameButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		monitor.errorMessage("");
 
 	}
 }

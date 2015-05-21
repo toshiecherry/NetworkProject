@@ -1,8 +1,6 @@
 package client;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -35,6 +33,23 @@ public class ClientSender {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public Card[] startGame() {
+		try {
+			Writer out = new OutputStreamWriter(connection.getOutputStream());
+			ObjectInputStream in = new ObjectInputStream(connection.getInputStream());
+			out.write("StartGame");
+			out.flush();
+			Card[] read = (Card[]) in.readObject();
+			return read;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 }

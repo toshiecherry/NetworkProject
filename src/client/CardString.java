@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class CardString extends JTextField implements ActionListener {
 	private int cardIndex;
 
