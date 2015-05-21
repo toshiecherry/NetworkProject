@@ -16,12 +16,12 @@ public class DrawCardButton extends JButton implements ActionListener {
 	private CardHand hand;
 
 	public DrawCardButton(GameMonitor monitor, ClientSender sender, CardHand cardHand) {
-		super("Dra kort");
+		super("Draw card");
 		this.monitor = monitor;
 		this.sender = sender;
 		hand = cardHand;
 		addActionListener(this);
-		this.setToolTipText("Drar kort");
+		this.setToolTipText("Draws a card");
 	}
 
 	@Override

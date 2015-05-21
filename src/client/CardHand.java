@@ -58,5 +58,39 @@ public class CardHand {
 		}
 		amountOfCards = 0;
 	}
+	
+	/* 
+	 * To check if a player has bubblan
+	 */
+	public boolean bubblanHand(){
+		if(amountOfCards == 4){
+			boolean card01 = false;
+			boolean card12 = false;
+			boolean card23 = false;
+			boolean card34 = false;
+			
+			if(cards[0].equals(cards[1])){
+				card01 = true;
+			}
+			if(cards[1].equals(cards[2])){
+				card12 = true;
+			}
+			if(cards[2].equals(cards[3])){
+				card23 = true;
+			}
+			if(cards[3].equals(cards[4])){
+				card34 = true;
+			}
+			if(card01 == true && card12 == true && card23 == true && card34){
+				card01 = false;
+				card12 = false;
+				card23 = false;
+				card34 = false;
+				return true;
+			}
+			
+		}
+		return false;
+	}
 
 }
