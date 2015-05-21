@@ -16,12 +16,12 @@ public class StartGameButton extends JButton implements ActionListener {
 	private CardHand cardHand;
 
 	public StartGameButton(GameMonitor monitor, ClientSender sender, CardHand cardHand) {
-		super("Start Game");
+		super("Starta spel");
 		this.monitor = monitor;
 		this.sender = sender;
 		this.cardHand = cardHand;
 		addActionListener(this);
-		this.setToolTipText("Starts the game");
+		this.setToolTipText("Startar spelomgång");
 	}
 
 	@Override
@@ -31,6 +31,7 @@ public class StartGameButton extends JButton implements ActionListener {
 			for (int i = 0; i < 4; i++) {
 				cardHand.addCard(cards[i]);
 			}
+			System.out.println(cards[0] + " " + cards[1] + " " + cards[2]+ " " + cards[3]+ " " + cards[4]);
 		} else {
 			monitor.errorMessage("The startpile is not working");
 		}

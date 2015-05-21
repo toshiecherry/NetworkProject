@@ -21,7 +21,7 @@ public class GameMonitor {
 		String name = JOptionPane.showInputDialog("Select username");
 		if (name != null) {
 			handler.setPlayerName(name);
-			ClientSender sender = new ClientSender(socket);
+			ClientSender sender = new ClientSender(socket, handler);
 			bottomPanel = new ButtonAndMessagePanel(this, sender, cardHand);
 			UpperPanel upperPanel = new UpperPanel(this, sender, cardHand);
 			CardString[][] field = new CardString[1][5];

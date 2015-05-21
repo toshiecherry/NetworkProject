@@ -51,15 +51,15 @@ public class CardHand {
 		}
 		return null;
 	}
-
-	public void newGameHand() {
-		for (int i = 0; i < cards.length; i++) {
+	
+	public void newGameHand(){
+		for(int i=0; i < cards.length;i++){
 			cards[i] = null;
 		}
 		amountOfCards = 0;
 	}
-
-	/*
+	
+	/* 
 	 * To check if a player has bubblan
 	 */
 	public boolean bubblanHand() {

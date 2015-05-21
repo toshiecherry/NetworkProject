@@ -14,8 +14,8 @@ public class GameServer {
 		ServerSocket server;
 		try {
 			server = new ServerSocket(3000);
+			Socket connection = null;
 			while (true) {
-				Socket connection = null;
 				CardPiles piles = new CardPiles();
 				GameParticipants participants = new GameParticipants();
 				try {

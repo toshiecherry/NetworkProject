@@ -13,10 +13,9 @@ public class ButtonAndMessagePanel extends JPanel {
 	private JLabel messageLabel;
 
 	public ButtonAndMessagePanel(GameMonitor monitor, ClientSender sender, CardHand cardHand) {
-		setLayout(new GridLayout(2, 2));
+		setLayout(new GridLayout(2, 1));
 		messageLabel = new JLabel("       ");
 		add(new DrawCardButton(monitor, sender, cardHand));
-		add(new BubblanButton(monitor, sender, cardHand));
 		add(messageLabel);
 	}
 
