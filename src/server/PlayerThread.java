@@ -64,12 +64,25 @@ public class PlayerThread implements Runnable {
 					while (gameStarted) {
 						int command = 0;
 						int index = 0; // Vilket kort man ska ta bort
-						switch (command) { // Göra om detta med actionListener
-						case 0: // När man tar upp kort
+						String input = in.readLine();
+						if(input.equals("cardDrawn")){ // När man tar upp kort
 							if (takePile.size() > 0) {
 								hand.addCard(takePile.drawCard());
 							}
-							break;
+						} else if (input.equals("throwCard")){
+							
+						}else if(input.equals("leaveGame")){
+							
+						}else if(input.equals("gotBubblan")){
+							
+						}
+						
+						switch (command) { // Göra om detta med actionListener
+//						case 0: 
+//							if (takePile.size() > 0) {
+//								hand.addCard(takePile.drawCard());
+//							}
+//							break;
 						case 1: // När man slänger kort
 							Card trashCard = hand.removeCard(index);
 							if (trashCard != null) {
