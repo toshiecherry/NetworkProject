@@ -3,6 +3,7 @@ package server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
@@ -25,7 +26,8 @@ public class PlayerThread implements Runnable {
 	private boolean gameStarted;
 	private boolean completeHand;
 
-	public PlayerThread(Socket connection, CardPiles piles, GameParticipants players) {
+	public PlayerThread(Socket connection, CardPiles piles,
+			GameParticipants players) {
 		this.connection = connection;
 		this.piles = piles;
 		this.players = players;
@@ -35,8 +37,10 @@ public class PlayerThread implements Runnable {
 	public void run() {
 
 		try {
-			Writer out = new OutputStreamWriter(connection.getOutputStream());
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			ObjectOutputStream out = new ObjectOutputStream(
+					connection.getOutputStream());
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					connection.getInputStream()));
 			connectedToGame = true;
 
 			while (connectedToGame) {
@@ -49,29 +53,39 @@ public class PlayerThread implements Runnable {
 						throwPile = piles.getPile(0);
 					}
 
-					gameStarted = true;
-					for (int i = 0; i < 4; i++) {
-						hand.addCard(piles.getStartCards()); // delar ut fyra
-																// kort till
-																// trÃ¥den.
-																// Metoden Ã¤r
-																// synchronized.
+					String inputStart = in.readLine();
+					if (inputStart.equals("StartGame")) {
+						gameStarted = true;
+						Card[] cards = new Card[4];
+						for (int i = 0; i < 4; i++) {
+							cards[i] = piles.getStartCards();
+						}
+						out.writeObject(cards);
 					}
-
 					while (gameStarted) {
 						int command = 0;
 						int index = 0; // Vilket kort man ska ta bort
 						String input = in.readLine();
-						if (input.equals("cardDrawn")) { // NÃ¤r man tar upp kort
+						if (input.equals("cardDrawn")) { // NÃ¤r man tar upp
+															// kort
 							if (takePile.size() > 0) {
-								hand.addCard(takePile.drawCard());
+								Card card = takePile.drawCard();
+								out.writeObject(card);
+							} else {
+								out.writeObject(null);
 							}
 						} else if (input.equals("throwCard")) {
+							// throwPile.addCard();
 
 						} else if (input.equals("leaveGame")) {
-
+							gameStarted = false;
+							connectedToGame = false;
+							
 						} else if (input.equals("gotBubblan")) {
-
+							// Lägg till en ny knapp
+							// Lägg till en ruta med en counter
+							// ++ på sagda counter
+							
 						}
 
 						switch (command) { // GÃ¶ra om detta med actionListener
@@ -104,6 +118,7 @@ public class PlayerThread implements Runnable {
 						// actionlistener?
 
 					}
+
 				}
 
 			}
