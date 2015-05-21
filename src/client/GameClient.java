@@ -11,13 +11,12 @@ public class GameClient {
 	private String playerName;
 
 	public static void main(String[] args) {
-		ClientHandler handler = new ClientHandler();
-		GameMonitor gameMonitor = new GameMonitor(handler);
-		
 		try {
 			Socket socket = new Socket(HOST_NAME, 3000);
 			CardHand hand = new CardHand();
-			
+			ClientHandler handler = new ClientHandler();
+			GameMonitor gameMonitor = new GameMonitor(handler, hand, socket);
+
 			socket.close();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();

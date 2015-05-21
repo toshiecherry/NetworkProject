@@ -5,10 +5,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import client.ClientSender;
+
 public class LeaveGameButton extends JButton implements ActionListener {
 	private GameMonitor monitor;
 
-	public LeaveGameButton(GameMonitor monitor) {
+	public LeaveGameButton(GameMonitor monitor, ClientSender sender) {
 		super("Lämna spelomgång");
 		this.monitor = monitor;
 		addActionListener(this);
