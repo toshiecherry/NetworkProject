@@ -1,13 +1,11 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.net.Socket;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import client.CardHand;
 import client.CardString;
@@ -15,7 +13,7 @@ import client.ClientHandler;
 import client.ClientSender;
 
 public class GameMonitor {
-	protected JLabel message;
+	private static ButtonAndMessagePanel bottomPanel;
 
 	public GameMonitor(ClientHandler handler, CardHand cardHand, Socket socket) {
 		JFrame frame = new JFrame("Bubblan");
@@ -25,8 +23,7 @@ public class GameMonitor {
 		if (name != null) {
 			handler.setPlayerName(name);
 			ClientSender sender = new ClientSender(socket);
-			message = new JLabel("yes");
-			ButtonAndMessagePanel bottomPanel = new ButtonAndMessagePanel(this, sender);
+			bottomPanel = new ButtonAndMessagePanel(this, sender, cardHand);
 			UpperPanel upperPanel = new UpperPanel(this, sender);
 			CardString[][] field = new CardString[1][5];
 			CardGrid middlePanel = new CardGrid(1, 5, field);
@@ -40,6 +37,10 @@ public class GameMonitor {
 			frame.setResizable(true);
 			frame.setVisible(true);
 		}
+	}
+
+	public static void errorMessage(String error) {
+		bottomPanel.setText(error);
 	}
 
 }

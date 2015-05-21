@@ -3,9 +3,12 @@ package client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
+
+import se.lth.cs.ptdc.cardGames.Card;
 
 public class ClientSender {
 	private Socket connection;
@@ -15,17 +18,23 @@ public class ClientSender {
 
 	}
 
-	public void sendCommand(String command) {
+	public Card sendCommand(String command) {
 		try {
 			Writer out = new OutputStreamWriter(connection.getOutputStream());
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			ObjectInputStream in = new ObjectInputStream(connection.getInputStream());
 			out.write(command);
 			out.flush();
+			try {
+				Card read = (Card) in.readObject();
+				return read;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 }
