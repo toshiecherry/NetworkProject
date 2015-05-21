@@ -16,7 +16,7 @@ public class DrawCardButton extends JButton implements ActionListener {
 	private CardHand hand;
 
 	public DrawCardButton(GameMonitor monitor, ClientSender sender, CardHand cardHand) {
-		super("Draw card");
+		super("Draw Card");
 		this.monitor = monitor;
 		this.sender = sender;
 		hand = cardHand;

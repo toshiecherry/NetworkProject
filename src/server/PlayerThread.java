@@ -25,9 +25,9 @@ public class PlayerThread implements Runnable {
 	private String playerName;
 	private boolean gameStarted;
 	private boolean completeHand;
+	private int playerIndex;
 
-	public PlayerThread(Socket connection, CardPiles piles,
-			GameParticipants players) {
+	public PlayerThread(Socket connection, CardPiles piles, GameParticipants players) {
 		this.connection = connection;
 		this.piles = piles;
 		this.players = players;
@@ -37,85 +37,51 @@ public class PlayerThread implements Runnable {
 	public void run() {
 
 		try {
-			ObjectOutputStream out = new ObjectOutputStream(
-					connection.getOutputStream());
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
-			connectedToGame = true;
-
+			ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream());
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			playerName = in.readLine();
+			connectedToGame = players.add(playerName);
 			while (connectedToGame) {
-				if (players.add(playerName) == true) {
-					int playerIndex = players.getIndex(playerName);
-					takePile = piles.getPile(playerIndex);
-					if (piles.length() < playerIndex) {
-						throwPile = piles.getPile(playerIndex + 1);
-					} else {
-						throwPile = piles.getPile(0);
-					}
+				int playerIndex = players.getIndex(playerName);
+				takePile = piles.getPile(playerIndex);
+				if (piles.length() < playerIndex) {
+					throwPile = piles.getPile(playerIndex + 1);
+				} else {
+					throwPile = piles.getPile(0);
+				}
+				String inputStart = in.readLine();
+				while (inputStart != "StartGame") {
+					in.readLine();
 
-					String inputStart = in.readLine();
-					if (inputStart.equals("StartGame")) {
-						gameStarted = true;
-						Card[] cards = new Card[4];
-						for (int i = 0; i < 4; i++) {
-							cards[i] = piles.getStartCards();
+				}
+				gameStarted = true;
+				Card[] cards = new Card[4];
+				for (int i = 0; i < 4; i++) {
+					cards[i] = piles.getStartCards();
+				}
+				out.writeObject(cards);
+
+				while (gameStarted && players.size() > 3) {
+					String input = in.readLine();
+					if (input.equals("cardDrawn")) {
+						if (takePile.size() > 0) {
+							Card card = takePile.drawCard();
+							out.writeObject(card);
+						} else {
+							out.writeObject(null);
 						}
-						out.writeObject(cards);
-					}
-					while (gameStarted) {
-						int command = 0;
-						int index = 0; // Vilket kort man ska ta bort
-						String input = in.readLine();
-						if (input.equals("cardDrawn")) { // När man tar upp
-															// kort
-							if (takePile.size() > 0) {
-								Card card = takePile.drawCard();
-								out.writeObject(card);
-							} else {
-								out.writeObject(null);
-							}
-						} else if (input.equals("throwCard")) {
-							// throwPile.addCard();
+					} else if (input.equals("throwCard")) {
+						// throwPile.addCard();
 
-						} else if (input.equals("leaveGame")) {
-							gameStarted = false;
-							connectedToGame = false;
-							
-						} else if (input.equals("gotBubblan")) {
-							// L�gg till en ny knapp
-							// L�gg till en ruta med en counter
-							// ++ p� sagda counter
-							
-						}
+					} else if (input.equals("leaveGame")) {
+						gameStarted = false;
+						connectedToGame = false;
+						players.removePlayer(playerName);
 
-						switch (command) { // Göra om detta med actionListener
-						// case 0:
-						// if (takePile.size() > 0) {
-						// hand.addCard(takePile.drawCard());
-						// }
-						// break;
-						case 1: // När man slänger kort
-							Card trashCard = hand.removeCard(index);
-							if (trashCard != null) {
-								throwPile.addCard(trashCard);
-							}
-							break;
-						case 2: // Alltså när man får bubblan. Hur kollar man
-								// att alla tryckt bubblan?
-							completeHand = true;
-							break;
-						case 3: // Vid leave game
-							players.removePlayer(playerName); // hitta namnet
-																// hur?
-							for (int i = 0; i < throwPile.size(); i++) {
-								takePile.addCard(throwPile.drawCard());
-							}
-							// throwPile.delete();
-							// typ?
-						}
-
-						// Kan k�ra syso hand tills vi har gui?
-						// actionlistener?
+					} else if (input.equals("gotBubblan")) {
+						// L�gg till en ny knapp
+						// L�gg till en ruta med en counter
+						// ++ p� sagda counter
 
 					}
 

@@ -16,12 +16,12 @@ public class StartGameButton extends JButton implements ActionListener {
 	private CardHand cardHand;
 
 	public StartGameButton(GameMonitor monitor, ClientSender sender, CardHand cardHand) {
-		super("Starta spel");
+		super("Start Game");
 		this.monitor = monitor;
 		this.sender = sender;
 		this.cardHand = cardHand;
 		addActionListener(this);
-		this.setToolTipText("Startar spelomgång");
+		this.setToolTipText("Starts the game");
 	}
 
 	@Override

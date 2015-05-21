@@ -14,7 +14,7 @@ public class BubblanButton extends JButton implements ActionListener {
 	private CardHand hand;
 
 	public BubblanButton(GameMonitor monitor, ClientSender sender, CardHand hand) {
-		super("Got bubblan");
+		super("Got Bubblan");
 		this.monitor = monitor;
 		this.sender = sender;
 		this.hand = hand;
