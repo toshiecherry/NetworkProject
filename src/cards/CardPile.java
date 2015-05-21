@@ -30,11 +30,11 @@ public class CardPile {
 	 * 
 	 * @return Card retunerar det kort man dragit
 	 */
-	public Card drawCard() {
+	public synchronized Card drawCard() {
 		return pile.remove(0);
 	}
 
-	public int size() {
+	public synchronized int size() {
 		return pile.size();
 	}
 

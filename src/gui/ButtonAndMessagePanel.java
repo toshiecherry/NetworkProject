@@ -12,9 +12,5 @@ public class ButtonAndMessagePanel extends JPanel {
 		add(new DrawCardButton(monitor));
 	}
 	
-	public ButtonAndMessagePanel(GameMonitor monitor, String string){
-		setLayout(new FlowLayout(FlowLayout.LEFT));
-		add(new StartGameButton(monitor));
-		add(new LeaveGameButton(monitor));
-	}
+
 }

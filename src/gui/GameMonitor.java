@@ -20,7 +20,7 @@ public class GameMonitor {
 			handler.setPlayerName(name);
 			message = new JLabel("yes");
 			ButtonAndMessagePanel bottomPanel = new ButtonAndMessagePanel(this);
-			ButtonAndMessagePanel upperPanel = new ButtonAndMessagePanel(this, "Hej");
+			UpperPanel upperPanel = new UpperPanel(this);
 			frame.add(upperPanel, BorderLayout.NORTH);
 			frame.add(bottomPanel, BorderLayout.SOUTH);
 
