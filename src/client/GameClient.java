@@ -16,7 +16,6 @@ public class GameClient {
 			CardHand hand = new CardHand();
 			ClientHandler handler = new ClientHandler();
 			GameMonitor gameMonitor = new GameMonitor(handler, hand, socket);
-
 			socket.close();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();

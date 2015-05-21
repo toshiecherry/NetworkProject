@@ -9,10 +9,12 @@ import client.ClientSender;
 
 public class StartGameButton extends JButton implements ActionListener {
 	private GameMonitor monitor;
+	private ClientSender sender;
 
 	public StartGameButton(GameMonitor monitor, ClientSender sender) {
 		super("Starta spel");
 		this.monitor = monitor;
+		this.sender = sender;
 		addActionListener(this);
 		this.setToolTipText("Startar spelomgång");
 	}

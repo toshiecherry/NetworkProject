@@ -23,11 +23,9 @@ public class PlayerThread implements Runnable {
 	private GameParticipants players;
 	private String playerName;
 	private boolean gameStarted;
-	private CardHand hand;
 	private boolean completeHand;
 
-	public PlayerThread(Socket connection, CardPiles piles,
-			GameParticipants players) {
+	public PlayerThread(Socket connection, CardPiles piles, GameParticipants players) {
 		this.connection = connection;
 		this.piles = piles;
 		this.players = players;
@@ -38,8 +36,7 @@ public class PlayerThread implements Runnable {
 
 		try {
 			Writer out = new OutputStreamWriter(connection.getOutputStream());
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connectedToGame = true;
 
 			while (connectedToGame) {
@@ -65,24 +62,24 @@ public class PlayerThread implements Runnable {
 						int command = 0;
 						int index = 0; // Vilket kort man ska ta bort
 						String input = in.readLine();
-						if(input.equals("cardDrawn")){ // När man tar upp kort
+						if (input.equals("cardDrawn")) { // När man tar upp kort
 							if (takePile.size() > 0) {
 								hand.addCard(takePile.drawCard());
 							}
-						} else if (input.equals("throwCard")){
-							
-						}else if(input.equals("leaveGame")){
-							
-						}else if(input.equals("gotBubblan")){
-							
+						} else if (input.equals("throwCard")) {
+
+						} else if (input.equals("leaveGame")) {
+
+						} else if (input.equals("gotBubblan")) {
+
 						}
-						
+
 						switch (command) { // Göra om detta med actionListener
-//						case 0: 
-//							if (takePile.size() > 0) {
-//								hand.addCard(takePile.drawCard());
-//							}
-//							break;
+						// case 0:
+						// if (takePile.size() > 0) {
+						// hand.addCard(takePile.drawCard());
+						// }
+						// break;
 						case 1: // När man slänger kort
 							Card trashCard = hand.removeCard(index);
 							if (trashCard != null) {
@@ -99,8 +96,8 @@ public class PlayerThread implements Runnable {
 							for (int i = 0; i < throwPile.size(); i++) {
 								takePile.addCard(throwPile.drawCard());
 							}
-							//throwPile.delete();
-							//typ?
+							// throwPile.delete();
+							// typ?
 						}
 
 						// Kan k�ra syso hand tills vi har gui?

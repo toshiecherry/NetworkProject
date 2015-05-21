@@ -21,6 +21,6 @@ public class DrawCardButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		sender.sendCommand("DrawCard");
 	}
 }
