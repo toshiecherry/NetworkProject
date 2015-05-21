@@ -10,7 +10,7 @@ public class LoadImages {
 
 	}
 
-	private void loadCards() {
+	private Image[] loadCards() {
 		System.out.println("Loading cards");
 
 		String pre = "";
@@ -30,5 +30,6 @@ public class LoadImages {
 						card);
 			}
 		}
+		return cards;
 	}
 }
