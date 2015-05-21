@@ -26,7 +26,8 @@ public class PlayerThread implements Runnable {
 	private CardHand hand;
 	private boolean completeHand;
 
-	public PlayerThread(Socket connection, CardPiles piles, GameParticipants players) {
+	public PlayerThread(Socket connection, CardPiles piles,
+			GameParticipants players) {
 		this.connection = connection;
 		this.piles = piles;
 		this.players = players;
@@ -37,7 +38,8 @@ public class PlayerThread implements Runnable {
 
 		try {
 			Writer out = new OutputStreamWriter(connection.getOutputStream());
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					connection.getInputStream()));
 			connectedToGame = true;
 
 			while (connectedToGame) {
@@ -77,6 +79,15 @@ public class PlayerThread implements Runnable {
 						case 2: // Alltså när man får bubblan. Hur kollar man
 								// att alla tryckt bubblan?
 							completeHand = true;
+							break;
+						case 3: // Vid leave game
+							players.removePlayer(playerName); // hitta namnet
+																// hur?
+							for (int i = 0; i < throwPile.size(); i++) {
+								takePile.addCard(throwPile.drawCard());
+							}
+							//throwPile.delete();
+							//typ?
 						}
 
 						// Kan k�ra syso hand tills vi har gui?

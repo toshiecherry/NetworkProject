@@ -22,4 +22,10 @@ public class GameParticipants {
 	public int getIndex(String player){
 		return participants.indexOf(player);
 	}
+	
+	public void removePlayer(String name){
+		if(participants.contains(name)){
+			participants.remove(name);
+		}
+	}
 }
