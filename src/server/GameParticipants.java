@@ -1,6 +1,7 @@
 package server;
 
 import java.net.InetAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 
 /* 
@@ -29,6 +30,10 @@ public class GameParticipants {
 		if (participants.contains(playerName)) {
 			participants.remove(playerName);
 		}
+	}
+	
+	public Socket getPlayerConnection(int index){
+		return participants.get(index).getConnection();
 	}
 
 	public int size() {
