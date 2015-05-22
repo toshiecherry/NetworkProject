@@ -23,11 +23,13 @@ public class PlayerThread implements Runnable {
 	private boolean completeHand;
 	private int playerIndex;
 	private int amountOfCards;
+	private GameMailbox box;
 
-	public PlayerThread(Socket connection, CardPiles piles, GameParticipants players) {
+	public PlayerThread(Socket connection, CardPiles piles, GameParticipants players, GameMailbox box) {
 		this.connection = connection;
 		this.piles = piles;
 		this.players = players;
+		this.box = box;
 		amountOfCards = 0;
 	}
 
@@ -96,6 +98,7 @@ public class PlayerThread implements Runnable {
 						players.removePlayer(playerName);
 
 					} else if (input.charAt(0) == 'G') {
+						box.setMessage("Player: " + playerName + "got Bubblan");
 						// L�gg till en ny knapp
 						// L�gg till en ruta med en counter
 						// ++ p� sagda counter

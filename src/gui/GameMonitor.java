@@ -29,10 +29,7 @@ public class GameMonitor {
 			UpperPanel upperPanel = new UpperPanel(this, sender, cardHand);
 			CardString[][] field = new CardString[1][5];
 			CardGrid middlePanel = new CardGrid(1, 5, field);
-			ImageIcon start = new ImageIcon(getClass().getResource("c1.png"));
-			JButton button = new JButton(start);
 			frame.setLayout(new BorderLayout());
-			frame.add(button, BorderLayout.WEST);
 			frame.add(upperPanel, BorderLayout.NORTH);
 			frame.add(bottomPanel, BorderLayout.SOUTH);
 			frame.add(middlePanel, BorderLayout.CENTER);

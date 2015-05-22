@@ -18,9 +18,10 @@ public class GameServer {
 			while (true) {
 				CardPiles piles = new CardPiles();
 				GameParticipants participants = new GameParticipants();
+				GameMailbox box = new GameMailbox();
 				try {
 					connection = server.accept();
-					Runnable task = new PlayerThread(connection, piles, participants);
+					Runnable task = new PlayerThread(connection, piles, participants, box);
 					pool.submit(task);
 
 				} catch (IOException ex) {
