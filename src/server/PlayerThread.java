@@ -40,6 +40,7 @@ public class PlayerThread implements Runnable {
 			playerName = in.readLine();
 			connectedToGame = players.add(playerName);
 			System.out.println(playerName);
+			System.out.println(players.getIndex(playerName));
 			while (connectedToGame) {
 				System.out.println("Connected");
 				playerIndex = players.getIndex(playerName);
@@ -96,7 +97,8 @@ public class PlayerThread implements Runnable {
 						players.removePlayer(playerName);
 
 					} else if (input.charAt(0) == 'G') {
-						// L�gg till en ny knapp
+						
+						
 						// L�gg till en ruta med en counter
 						// ++ p� sagda counter
 
