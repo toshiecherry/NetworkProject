@@ -20,13 +20,12 @@ public class GameMonitor {
 	private static ButtonAndMessagePanel bottomPanel;
 
 	public GameMonitor(ClientHandler handler, Socket socket) {
-		JFrame frame = new JFrame("Bubblan");
-		frame.setName("Bubblan");
+		JFrame frame = new JFrame("Bubblan The Game");
+		frame.setName("Bubblan The Game");
 		frame.setBounds(500, 100, 450, 300);
 		String name = JOptionPane.showInputDialog("Select username");
 		if (name != null) {
-			handler.setPlayerName(name);
-			ClientSender sender = new ClientSender(socket, handler);
+			ClientSender sender = new ClientSender(socket, name);
 			ImageLabel[][] field = new ImageLabel[1][5];
 			CardHand cardHand = new CardHand(field);
 			bottomPanel = new ButtonAndMessagePanel(this, sender, cardHand);
@@ -38,7 +37,7 @@ public class GameMonitor {
 			frame.add(middlePanel, BorderLayout.CENTER);
 
 			frame.pack();
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setResizable(false);
 			frame.setVisible(true);
 		}

@@ -13,13 +13,13 @@ public class ClientSender {
 	private BufferedReader in;
 	private boolean gameStarted;
 
-	public ClientSender(Socket socket, ClientHandler handler) {
+	public ClientSender(Socket socket, String name) {
 		connection = socket;
 		gameStarted = false;
 		try {
 			out = new OutputStreamWriter(connection.getOutputStream());
 			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			out.write(handler.getPlayerName() + "\n");
+			out.write(name + "\n");
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -71,7 +71,26 @@ public class ClientSender {
 	}
 
 	public void leaveGame() {
-		gameStarted = false;
+		try {
+			out.write("LeaveGame \n");
+			out.flush();
+			gameStarted = false;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public boolean gotBubblan() {
+		try {
+			out.write("GotBubblan");
+			out.flush();
+			String s = in.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+
 	}
 
 }
