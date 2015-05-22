@@ -4,15 +4,14 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import client.CardString;
-
 @SuppressWarnings("serial")
 public class CardGrid extends JPanel {
 
-	public CardGrid(int rows, int columns, CardString[][] field) {
-		super(new GridLayout(rows, columns));
-		for (int i = 0; i < columns; i++) {
-			field[0][i] = new CardString(i);
+	public CardGrid() {
+		setLayout(new GridLayout(1, 5));
+		ImageLabel[][] field = new ImageLabel[1][5];
+		for (int i = 0; i < 5; i++) {
+			field[0][i] = new ImageLabel(i);
 			add(field[0][i]);
 		}
 

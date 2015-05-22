@@ -7,19 +7,23 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
-public class ImageLabel implements ActionListener {
+@SuppressWarnings("serial")
+public class ImageLabel extends JLabel implements ActionListener {
+	private int labelIndex;
 
-	public ImageLabel() {
+	public ImageLabel(int i) {
+		labelIndex = i;
 		try {
-			BufferedImage myPicture = ImageIO.read(new File("picture/b1.png"));
-			
+			BufferedImage myPicture = ImageIO.read(new File("pictures/b1.png"));
+			setIcon(new ImageIcon(myPicture));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

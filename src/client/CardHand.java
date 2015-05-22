@@ -3,24 +3,28 @@ package client;
 public class CardHand {
 	private String[] cards;
 	private int amountOfCards;
+	private int cardIndex;
 
 	public CardHand() {
 		cards = new String[5];
 		amountOfCards = 0;
+		cardIndex = 0;
 	}
 
 	public boolean addCard(String newCard) {
 		if (amountOfCards < 5) {
-			cards[amountOfCards] = newCard;
+			cards[cardIndex] = newCard;
 			amountOfCards++;
+			cardIndex++;
 			return true;
 		}
 		return false;
 
 	}
 
-	public String removeCard(int cardIndex) {
+	public String removeCard(int index) {
 		if (amountOfCards > 4) {
+			cardIndex = index;
 			String drawn = cards[cardIndex];
 			cards[cardIndex] = null;
 			return drawn;
