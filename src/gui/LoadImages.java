@@ -4,10 +4,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class LoadImages {
-	Image[] cards = new Image[53];
+	private Image[] cards;
 
 	public LoadImages() {
-
+		cards = loadCards();
 	}
 
 	private Image[] loadCards() {
@@ -26,16 +26,15 @@ public class LoadImages {
 
 			for (int i = 1; i < 14; i++) {
 				String card = "pictures/" + pre + i + ".png";
-				cards[i + (j - 1) * 13] = Toolkit.getDefaultToolkit().getImage(
-						card);
+				cards[i + (j - 1) * 13] = Toolkit.getDefaultToolkit().getImage(card);
 			}
 		}
 		return cards;
 	}
-	
-	public Image connectCardImage(Image[] image, String card){
-		int rank = Integer.parseInt( card.substring(2));
+
+	public Image connectCardImage(String card) {
+		int rank = Integer.parseInt(card.substring(2));
 		int suit = card.charAt(0);
-		return image[rank + (suit - 1) * 13];
+		return cards[rank + (suit - 1) * 13];
 	}
 }
