@@ -22,11 +22,13 @@ public class PlayerThread implements Runnable {
 	private boolean gameStarted;
 	private boolean completeHand;
 	private int playerIndex;
+	private int amountOfCards;
 
 	public PlayerThread(Socket connection, CardPiles piles, GameParticipants players) {
 		this.connection = connection;
 		this.piles = piles;
 		this.players = players;
+		amountOfCards = 0;
 	}
 
 	@Override
@@ -57,34 +59,49 @@ public class PlayerThread implements Runnable {
 					System.out.println(outString);
 					out.write(outString);
 					out.flush();
+					amountOfCards++;
 				}
 				System.out.println("Går in i spelet");
-				while (gameStarted && players.size() > 3) {
+				while (gameStarted) {
 					String input = in.readLine();
-					if (input.equals("drawCard")) {
-						if (takePile.size() > 0) {
-							Card newCard = takePile.drawCard();
-							String outString = (newCard.getSuit() + " " + newCard.getRank() + "\n");
-							System.out.println(outString);
-							out.write(outString);
-							out.flush();
+					System.out.println("Input är " + input);
+					if (input.charAt(0) == 'D') {
+						if (amountOfCards < 5) {
+							System.out.println("Drar kort");
+							if (takePile.size() > 0) {
+								Card newCard = takePile.drawCard();
+								String outString = (newCard.getSuit() + " " + newCard.getRank() + "\n");
+								System.out.println("Nya kortet är: " + outString);
+								out.write(outString);
+								out.flush();
+								amountOfCards++;
+							} else {
+								out.write("EmptyPileError \n");
+								out.flush();
+							}
 						} else {
-							out.write("error");
+							System.out.println("FEL");
+							out.write("TooManyCardsError \n");
+							System.out.println("FEL2");
 							out.flush();
 						}
-					} else if (input.equals("throwCard")) {
-						// throwPile.addCard();
 
-					} else if (input.equals("leaveGame")) {
+					} else if (input.charAt(0) == 'T') {
+						// throwPile.addCard();
+						amountOfCards--;
+
+					} else if (input.charAt(0) == 'L') {
 						gameStarted = false;
 						connectedToGame = false;
 						players.removePlayer(playerName);
 
-					} else if (input.equals("gotBubblan")) {
+					} else if (input.charAt(0) == 'G') {
 						// L�gg till en ny knapp
 						// L�gg till en ruta med en counter
 						// ++ p� sagda counter
 
+					} else {
+						return;
 					}
 
 				}

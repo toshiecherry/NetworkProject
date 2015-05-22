@@ -20,7 +20,7 @@ public class LeaveGameButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		monitor.errorMessage("");
+		monitor.errorMessage(" ");
 
 	}
 }

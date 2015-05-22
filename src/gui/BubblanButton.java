@@ -24,8 +24,8 @@ public class BubblanButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (hand.bubblanHand()) { //eller om nån annan tryckt bubblan
-			sender.sendCommand("gotBubblan");
+		if (hand.bubblanHand()) { // eller om nï¿½n annan tryckt bubblan
+			sender.sendCommand("GotBubblan");
 		}
 	}
 }

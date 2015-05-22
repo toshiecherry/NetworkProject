@@ -16,7 +16,7 @@ public class DrawCardButton extends JButton implements ActionListener {
 	private CardHand hand;
 
 	public DrawCardButton(GameMonitor monitor, ClientSender sender, CardHand cardHand) {
-		super("Draw card");
+		super("Draw Card");
 		this.monitor = monitor;
 		this.sender = sender;
 		hand = cardHand;
@@ -26,12 +26,15 @@ public class DrawCardButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String newCard = sender.sendCommand("drawCard \n");
-		if (newCard == "error") {
+		String newCard = sender.sendCommand("DrawCard \n");
+		if (newCard.charAt(0) == 'E') {
 			monitor.errorMessage("Pile is empty");
+		} else if (newCard.charAt(0) == 'T') {
+			monitor.errorMessage("Too many cards on your hand");
 		} else {
 			hand.addCard(newCard);
-			
+			monitor.errorMessage(" ");
+
 		}
 	}
 }
