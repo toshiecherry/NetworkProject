@@ -42,8 +42,8 @@ public class GameMonitor {
 		bottomPanel.setText(error);
 	}
 	
-	public void errorMessageServer(String error){
-		upperPanel.setText(error);
-	}
+//	public void errorMessageServer(String error){
+//		upperPanel.setText(error);
+//	}
 
 }

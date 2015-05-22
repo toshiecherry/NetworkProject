@@ -14,9 +14,10 @@ public class GameParticipants {
 		participants = new ArrayList<Player>();
 	}
 
-	public boolean add(Player name) {
+	public synchronized boolean add(Player name) {
 		if (participants.size() < 4) {
 			participants.add(name);
+			notifyAll();
 			return true;
 		}
 		return false;

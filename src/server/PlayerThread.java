@@ -43,8 +43,10 @@ public class PlayerThread implements Runnable {
 			Player player = new Player(playerName, connection);
 			connectedToGame = players.add(player);
 			System.out.println(playerName);
-			System.out.println(players.getIndex(player));
-			while (connectedToGame) {
+			System.out.println("index: " + players.getIndex(player));
+			System.out.println("size: " + players.size());
+			
+			while (connectedToGame && players.size() == 2) {
 				System.out.println("Connected");
 				playerIndex = players.getIndex(player);
 				takePile = piles.getPile(playerIndex);
