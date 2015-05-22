@@ -30,7 +30,6 @@ public class StartGameButton extends JButton implements ActionListener {
 		if (cards != null) {
 			for (int i = 0; i < 4; i++) {
 				cardHand.addCard(cards[i]);
-				System.out.println(cards[i]);
 				monitor.errorMessage(" ");
 			}
 		} else {

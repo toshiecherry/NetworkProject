@@ -19,7 +19,7 @@ import client.ClientSender;
 public class GameMonitor {
 	private static ButtonAndMessagePanel bottomPanel;
 
-	public GameMonitor(ClientHandler handler, CardHand cardHand, Socket socket) {
+	public GameMonitor(ClientHandler handler, Socket socket) {
 		JFrame frame = new JFrame("Bubblan");
 		frame.setName("Bubblan");
 		frame.setBounds(500, 100, 450, 300);
@@ -27,14 +27,16 @@ public class GameMonitor {
 		if (name != null) {
 			handler.setPlayerName(name);
 			ClientSender sender = new ClientSender(socket, handler);
+			ImageLabel[][] field = new ImageLabel[1][5];
+			CardHand cardHand = new CardHand(field);
 			bottomPanel = new ButtonAndMessagePanel(this, sender, cardHand);
 			UpperPanel upperPanel = new UpperPanel(this, sender, cardHand);
-			CardGrid middlePanel = new CardGrid();
+			CardGrid middlePanel = new CardGrid(field, cardHand, sender);
 			frame.setLayout(new BorderLayout());
 			frame.add(upperPanel, BorderLayout.NORTH);
 			frame.add(bottomPanel, BorderLayout.SOUTH);
 			frame.add(middlePanel, BorderLayout.CENTER);
-			
+
 			frame.pack();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setResizable(false);

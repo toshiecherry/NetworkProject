@@ -11,7 +11,7 @@ import client.ClientSender;
 public class UpperPanel extends JPanel {
 
 	public UpperPanel(GameMonitor monitor, ClientSender sender, CardHand cardHand) {
-		setLayout(new FlowLayout(FlowLayout.LEFT));
+		setLayout(new FlowLayout(FlowLayout.CENTER));
 		add(new StartGameButton(monitor, sender, cardHand));
 		add(new LeaveGameButton(monitor, sender));
 	}

@@ -64,49 +64,51 @@ public class PlayerThread implements Runnable {
 					out.flush();
 					amountOfCards++;
 				}
-				System.out.println("Går in i spelet");
 				while (gameStarted) {
 					String input = in.readLine();
 					System.out.println("Input är " + input);
-					if (input.charAt(0) == 'D') {
-						if (amountOfCards < 5) {
-							System.out.println("Drar kort");
-							if (takePile.size() > 0) {
-								Card newCard = takePile.drawCard();
-								String outString = (newCard.getSuit() + " " + newCard.getRank() + "\n");
-								System.out.println("Nya kortet är: " + outString);
-								out.write(outString);
-								out.flush();
-								amountOfCards++;
+					if (input != null) {
+						if (input.charAt(0) == 'D') {
+							if (amountOfCards < 5) {
+								if (takePile.size() > 0) {
+									Card newCard = takePile.drawCard();
+									String outString = (newCard.getSuit() + " " + newCard.getRank() + "\n");
+									out.write(outString);
+									out.flush();
+									amountOfCards++;
+								} else {
+									out.write("EmptyPileError \n");
+									out.flush();
+								}
 							} else {
-								out.write("EmptyPileError \n");
+								out.write("TooManyCardsError \n");
 								out.flush();
 							}
+
+						} else if (input.charAt(0) == 'T') {
+							if (amountOfCards > 4) {
+								String c = in.readLine();
+								int suit = Integer.parseInt(c.charAt(0) + "");
+								int rank = Integer.parseInt(c.substring(2));
+								Card newCard = new Card(suit, rank);
+								throwPile.addCard(newCard);
+								amountOfCards--;
+							}
+
+						} else if (input.charAt(0) == 'L') {
+							gameStarted = false;
+							connectedToGame = false;
+							players.removePlayer(playerName);
+
+						} else if (input.charAt(0) == 'G') {
+
+							box.setMessage("Player: " + playerName + "got Bubblan");
+
 						} else {
-							System.out.println("FEL");
-							out.write("TooManyCardsError \n");
-							System.out.println("FEL2");
-							out.flush();
+							return;
 						}
 
-					} else if (input.charAt(0) == 'T') {
-						// throwPile.addCard();
-						amountOfCards--;
-
-					} else if (input.charAt(0) == 'L') {
-						gameStarted = false;
-						connectedToGame = false;
-						players.removePlayer(playerName);
-
-					} else if (input.charAt(0) == 'G') {
-
-						box.setMessage("Player: " + playerName + "got Bubblan");
-						// L�gg till en ny knapp
-
-					} else {
-						return;
 					}
-
 				}
 
 			}

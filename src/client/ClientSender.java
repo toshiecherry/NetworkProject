@@ -27,9 +27,9 @@ public class ClientSender {
 
 	}
 
-	public String sendCommand(String command) {
+	public String drawCard() {
 		try {
-			out.write(command);
+			out.write("DrawCard \n");
 			out.flush();
 			String read = in.readLine();
 			return read;
@@ -38,6 +38,16 @@ public class ClientSender {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void throwCard(String card) {
+		try {
+			out.write("TrowCard \n" + card + "\n");
+			out.flush();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String[] startGame() {

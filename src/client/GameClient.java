@@ -12,10 +12,9 @@ public class GameClient {
 	public static void main(String[] args) {
 		try {
 			Socket socket = new Socket(HOST_NAME, 3000);
-			CardHand hand = new CardHand();
 			ClientHandler handler = new ClientHandler();
 			@SuppressWarnings("unused")
-			GameMonitor gameMonitor = new GameMonitor(handler, hand, socket);
+			GameMonitor gameMonitor = new GameMonitor(handler, socket);
 			ReaderThread thread = new ReaderThread(gameMonitor);
 			thread.run();
 		} catch (UnknownHostException e) {
