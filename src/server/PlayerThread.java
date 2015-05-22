@@ -42,7 +42,6 @@ public class PlayerThread implements Runnable {
 			playerName = in.readLine();
 			Player player = new Player(playerName, connection);
 			connectedToGame = players.add(player);
-			box.addPlayer(playerName, connection.getInetAddress());
 			System.out.println(playerName);
 			System.out.println(players.getIndex(player));
 			while (connectedToGame) {
