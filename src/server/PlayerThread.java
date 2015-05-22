@@ -20,7 +20,6 @@ public class PlayerThread implements Runnable {
 	private GameParticipants players;
 	private String playerName;
 	private boolean gameStarted;
-	private boolean completeHand;
 	private int playerIndex;
 	private int amountOfCards;
 	private GameMailbox box;
@@ -38,16 +37,10 @@ public class PlayerThread implements Runnable {
 		try {
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			System.out.println("in");
 			playerName = in.readLine();
 			Player player = new Player(playerName, connection);
 			connectedToGame = players.add(player);
-			System.out.println(playerName);
-			System.out.println("index: " + players.getIndex(player));
-			System.out.println("size: " + players.size());
-			
-			while (connectedToGame && players.size() == 2) {
-				System.out.println("Connected");
+			while (connectedToGame && players.size() == 4) {
 				playerIndex = players.getIndex(player);
 				takePile = piles.getPile(playerIndex);
 				if (piles.length() < playerIndex) {
@@ -56,20 +49,17 @@ public class PlayerThread implements Runnable {
 					throwPile = piles.getPile(0);
 				}
 				String inputStart = in.readLine();
-				System.out.println(inputStart);
 				Card card = null;
 				gameStarted = true;
 				for (int i = 0; i < 4; i++) {
 					card = piles.getStartCards();
 					String outString = (card.getSuit() + " " + card.getRank() + "\n");
-					System.out.println(outString);
 					out.write(outString);
 					out.flush();
 					amountOfCards++;
 				}
 				while (gameStarted) {
 					String input = in.readLine();
-					System.out.println("Input är " + input);
 					if (input != null) {
 						if (input.charAt(0) == 'D') {
 							if (amountOfCards < 5) {
@@ -103,7 +93,6 @@ public class PlayerThread implements Runnable {
 							connectedToGame = false;
 							players.removePlayer(player);
 							box.setMessage(playerName + " leaved the game \n");
-							System.out.println("Shuts Down");
 
 						} else if (input.charAt(0) == 'G') {
 							box.setMessage("Player: " + playerName + "got Bubblan \n");

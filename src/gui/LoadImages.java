@@ -29,7 +29,6 @@ public class LoadImages {
 		try {
 			myPicture = ImageIO.read(new File(picture));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
@@ -42,8 +41,6 @@ public class LoadImages {
 	}
 
 	private Image[] loadCards() {
-		System.out.println("Loading cards");
-
 		String pre = "";
 		for (int j = 1; j < 5; j++) {
 			if (j == 1)

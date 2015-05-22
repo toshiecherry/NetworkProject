@@ -7,7 +7,6 @@ import javax.swing.JButton;
 
 import client.CardHand;
 import client.ClientSender;
-import se.lth.cs.ptdc.cardGames.Card;
 
 @SuppressWarnings("serial")
 public class StartGameButton extends JButton implements ActionListener {

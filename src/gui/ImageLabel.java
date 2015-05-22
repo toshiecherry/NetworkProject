@@ -8,7 +8,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
 import javax.swing.JLabel;
 
 import client.CardHand;
@@ -54,7 +53,6 @@ public class ImageLabel extends JLabel {
 	}
 
 	private String getSuit(int suitNumb) {
-		System.out.println("SuitNumber är " + suitNumb);
 		if (suitNumb == 1) {
 			return "s";
 		} else if (suitNumb == 2) {
