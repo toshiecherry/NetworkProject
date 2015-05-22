@@ -34,6 +34,8 @@ public class LoadImages {
 	}
 	
 	public Image connectCardImage(Image[] image, String card){
-		return image[card.charAt(1) + (card.charAt(0) - 1) * 13];
+		int rank = Integer.parseInt( card.substring(2));
+		int suit = card.charAt(0);
+		return image[rank + (suit - 1) * 13];
 	}
 }
