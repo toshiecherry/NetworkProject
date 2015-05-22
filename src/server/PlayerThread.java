@@ -100,6 +100,7 @@ public class PlayerThread implements Runnable {
 							gameStarted = false;
 							connectedToGame = false;
 							players.removePlayer(playerName);
+							System.out.println("Shuts Down");
 
 						} else if (input.charAt(0) == 'G') {
 

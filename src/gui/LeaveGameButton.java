@@ -12,15 +12,16 @@ public class LeaveGameButton extends JButton implements ActionListener {
 	private GameMonitor monitor;
 
 	public LeaveGameButton(GameMonitor monitor, ClientSender sender) {
-		super("Lämna spelomgång");
+		super("Leave Game");
 		this.monitor = monitor;
 		addActionListener(this);
-		this.setToolTipText("Lämnar spelomgången");
+		this.setToolTipText("Shuts down the game");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		monitor.errorMessage(" ");
+		monitor.errorMessage("GAME OVER");
+		System.exit(0);
 
 	}
 }
