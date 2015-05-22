@@ -26,11 +26,12 @@ public class DrawCardButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Card newCard = sender.sendCommand("DrawCard");
-		if (newCard != null) {
-			hand.addCard(newCard);
-		} else {
+		String newCard = sender.sendCommand("drawCard \n");
+		if (newCard == "error") {
 			monitor.errorMessage("Pile is empty");
+		} else {
+			hand.addCard(newCard);
+			
 		}
 	}
 }

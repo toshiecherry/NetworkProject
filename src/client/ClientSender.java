@@ -1,24 +1,22 @@
 package client;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.net.Socket;
 
-import se.lth.cs.ptdc.cardGames.Card;
+import java.net.Socket;
 
 public class ClientSender {
 	private Socket connection;
 	private OutputStreamWriter out;
-	private ObjectInputStream in;
+	private BufferedReader in;
 
 	public ClientSender(Socket socket, ClientHandler handler) {
 		connection = socket;
 		try {
 			out = new OutputStreamWriter(connection.getOutputStream());
-			in = new ObjectInputStream(connection.getInputStream());
+			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			out.write(handler.getPlayerName() + "\n");
 			out.flush();
 		} catch (IOException e) {
@@ -27,17 +25,12 @@ public class ClientSender {
 
 	}
 
-	public Card sendCommand(String command) {
+	public String sendCommand(String command) {
 		try {
-
 			out.write(command);
 			out.flush();
-			try {
-				Card read = (Card) in.readObject();
-				return read;
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
+			String read = in.readLine();
+			return read;
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -45,15 +38,16 @@ public class ClientSender {
 		return null;
 	}
 
-	public Card[] startGame() {
+	public String[] startGame() {
 		try {
 			out.write("StartGame \n");
 			out.flush();
-			Card[] read = (Card[]) in.readObject();
+			String[] read = new String[4];
+			for (int i = 0; i < 4; i++) {
+				read[i] = in.readLine();
+			}
 			return read;
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return null;

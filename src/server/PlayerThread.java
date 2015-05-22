@@ -1,10 +1,10 @@
 package server;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 import se.lth.cs.ptdc.cardGames.Card;
@@ -32,7 +32,7 @@ public class PlayerThread implements Runnable {
 	@Override
 	public void run() {
 		try {
-			ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream());
+			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			System.out.println("in");
 			playerName = in.readLine();
@@ -49,25 +49,27 @@ public class PlayerThread implements Runnable {
 				}
 				String inputStart = in.readLine();
 				System.out.println(inputStart);
+				Card card = null;
 				gameStarted = true;
-				Card[] cards = new Card[4];
 				for (int i = 0; i < 4; i++) {
-					cards[i] = piles.getStartCards();
-					System.out.println(cards[i].getRank() + " " + cards[i].getSuit());
+					card = piles.getStartCards();
+					String outString = (card.getSuit() + " " + card.getRank() + "\n");
+					System.out.println(outString);
+					out.write(outString);
+					out.flush();
 				}
-				out.writeObject(cards);
-				out.flush();
 				System.out.println("Går in i spelet");
-
 				while (gameStarted && players.size() > 3) {
 					String input = in.readLine();
-					if (input.equals("cardDrawn")) {
+					if (input.equals("drawCard")) {
 						if (takePile.size() > 0) {
-							Card card = takePile.drawCard();
-							out.writeObject(card);
+							Card newCard = takePile.drawCard();
+							String outString = (newCard.getSuit() + " " + newCard.getRank() + "\n");
+							System.out.println(outString);
+							out.write(outString);
 							out.flush();
 						} else {
-							out.writeObject(null);
+							out.write("error");
 							out.flush();
 						}
 					} else if (input.equals("throwCard")) {
@@ -88,16 +90,13 @@ public class PlayerThread implements Runnable {
 				}
 
 			}
-			// // connection.close();
+			connection.close();
 
 		} catch (IOException e) {
 
-			// } catch (ClassNotFoundException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
 		} finally {
 			try {
-				// connection.close();
+				connection.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -26,12 +26,12 @@ public class StartGameButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Card[] cards = sender.startGame();
+		String[] cards = sender.startGame();
 		if (cards[0] != null) {
 			for (int i = 0; i < 4; i++) {
 				cardHand.addCard(cards[i]);
+				System.out.println(cards[i]);
 			}
-			System.out.println(cards[0] + " " + cards[1] + " " + cards[2] + " " + cards[3]);
 		} else {
 			monitor.errorMessage("The startpile is not working");
 		}
