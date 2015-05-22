@@ -19,7 +19,7 @@ public class ImageLabel extends JLabel {
 	private int labelIndex;
 	private CardHand hand;
 	private ClientSender sender;
-	private int suitNumber;
+	private String suit;
 
 	public ImageLabel(int i, CardHand cardHand, ClientSender sender) {
 		this.sender = sender;
@@ -40,8 +40,8 @@ public class ImageLabel extends JLabel {
 		StringBuilder sb = new StringBuilder();
 		sb.append("pictures/");
 		int suitNumber = Integer.parseInt(card.charAt(0) + "");
-		String s = getSuit(suitNumber);
-		sb.append(s);
+		suit = getSuit(suitNumber);
+		sb.append(suit);
 		sb.append(Integer.parseInt(card.substring(2)));
 		sb.append(".png");
 		try {
@@ -77,7 +77,7 @@ public class ImageLabel extends JLabel {
 		}
 
 		public void mouseClicked(MouseEvent event) {
-			if (suitNumber < 5) {
+			if (!suit.equals("b")) {
 				String throwCard = hand.removeCard(labelIndex);
 				sender.throwCard(throwCard);
 			}
