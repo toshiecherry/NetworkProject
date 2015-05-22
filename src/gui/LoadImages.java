@@ -32,4 +32,8 @@ public class LoadImages {
 		}
 		return cards;
 	}
+	
+	public Image connectCardImage(Image[] image, String card){
+		return image[card.charAt(1) + (card.charAt(0) - 1) * 13];
+	}
 }
