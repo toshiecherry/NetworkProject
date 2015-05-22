@@ -40,13 +40,14 @@ public class PlayerThread implements Runnable {
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			System.out.println("in");
 			playerName = in.readLine();
-			connectedToGame = players.add(playerName);
+			Player player = new Player(playerName, connection);
+			connectedToGame = players.add(player);
 			box.addPlayer(playerName, connection.getInetAddress());
 			System.out.println(playerName);
-			System.out.println(players.getIndex(playerName));
+			System.out.println(players.getIndex(player));
 			while (connectedToGame) {
 				System.out.println("Connected");
-				playerIndex = players.getIndex(playerName);
+				playerIndex = players.getIndex(player);
 				takePile = piles.getPile(playerIndex);
 				if (piles.length() < playerIndex) {
 					throwPile = piles.getPile(playerIndex + 1);
@@ -99,7 +100,7 @@ public class PlayerThread implements Runnable {
 						} else if (input.charAt(0) == 'L') {
 							gameStarted = false;
 							connectedToGame = false;
-							players.removePlayer(playerName);
+							players.removePlayer(player);
 							System.out.println("Shuts Down");
 
 						} else if (input.charAt(0) == 'G') {
