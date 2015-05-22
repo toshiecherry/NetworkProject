@@ -35,6 +35,7 @@ public class DrawCardButton extends JButton implements ActionListener {
 		} else {
 			hand.addCard(newCard);
 			monitor.errorMessage(" ");
+			monitor.errorMessageServer("yes");
 
 		}
 	}

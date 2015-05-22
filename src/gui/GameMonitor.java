@@ -12,6 +12,7 @@ import client.ClientSender;
 
 public class GameMonitor {
 	private static ButtonAndMessagePanel bottomPanel;
+	private static UpperPanel upperPanel;
 
 	public GameMonitor(ClientHandler handler, Socket socket) {
 		JFrame frame = new JFrame("Bubblan The Game");
@@ -39,6 +40,10 @@ public class GameMonitor {
 
 	public void errorMessage(String error) {
 		bottomPanel.setText(error);
+	}
+	
+	public void errorMessageServer(String error){
+		upperPanel.setText(error);
 	}
 
 }
