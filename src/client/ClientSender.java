@@ -19,18 +19,17 @@ public class ClientSender {
 		try {
 			out = new OutputStreamWriter(connection.getOutputStream());
 			in = new ObjectInputStream(connection.getInputStream());
-			out.write(handler.getPlayerName());
+			out.write(handler.getPlayerName() + "\n");
+			out.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 	public Card sendCommand(String command) {
 		try {
-			
+
 			out.write(command);
 			out.flush();
 			try {
@@ -48,9 +47,7 @@ public class ClientSender {
 
 	public Card[] startGame() {
 		try {
-			System.out.println("hej");
-			out.write("StartGame");
-			System.out.println("yes");
+			out.write("StartGame \n");
 			out.flush();
 			Card[] read = (Card[]) in.readObject();
 			return read;
