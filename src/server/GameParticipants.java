@@ -1,4 +1,5 @@
 package server;
+
 import java.util.ArrayList;
 
 /* 
@@ -18,17 +19,17 @@ public class GameParticipants {
 		}
 		return false;
 	}
-	
-	public int getIndex(String player){
-		return participants.indexOf(player);
+
+	public int getIndex(String playerName) {
+		return participants.indexOf(playerName);
 	}
-	
-	public void removePlayer(String name){
-		if(participants.contains(name)){
-			participants.remove(name);
+
+	public void removePlayer(String playerName) {
+		if (participants.contains(playerName)) {
+			participants.remove(playerName);
 		}
 	}
-	
+
 	public int size() {
 		return participants.size();
 	}
