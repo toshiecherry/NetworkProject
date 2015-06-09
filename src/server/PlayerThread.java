@@ -24,7 +24,8 @@ public class PlayerThread implements Runnable {
 	private int amountOfCards;
 	private GameMailbox box;
 
-	public PlayerThread(Socket connection, CardPiles piles, GameParticipants players, GameMailbox box) {
+	public PlayerThread(Socket connection, CardPiles piles,
+			GameParticipants players, GameMailbox box) {
 		this.connection = connection;
 		this.piles = piles;
 		this.players = players;
@@ -35,12 +36,14 @@ public class PlayerThread implements Runnable {
 	@Override
 	public void run() {
 		try {
-			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+					connection.getOutputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					connection.getInputStream()));
 			playerName = in.readLine();
 			Player player = new Player(playerName, connection);
 			connectedToGame = players.add(player);
-			while (connectedToGame && players.size() == 4) {
+			while (connectedToGame) {
 				playerIndex = players.getIndex(player);
 				takePile = piles.getPile(playerIndex);
 				if (piles.length() < playerIndex) {
@@ -59,13 +62,16 @@ public class PlayerThread implements Runnable {
 					amountOfCards++;
 				}
 				while (gameStarted) {
+					for (Player p : players.participants)
+						System.out.println(p);
 					String input = in.readLine();
 					if (input != null) {
 						if (input.charAt(0) == 'D') {
 							if (amountOfCards < 5) {
 								if (takePile.size() > 0) {
 									Card newCard = takePile.drawCard();
-									String outString = (newCard.getSuit() + " " + newCard.getRank() + "\n");
+									String outString = (newCard.getSuit() + " "
+											+ newCard.getRank() + "\n");
 									out.write(outString);
 									out.flush();
 									amountOfCards++;
@@ -95,7 +101,8 @@ public class PlayerThread implements Runnable {
 							box.setMessage(playerName + " leaved the game \n");
 
 						} else if (input.charAt(0) == 'G') {
-							box.setMessage("Player: " + playerName + "got Bubblan \n");
+							box.setMessage("Player: " + playerName
+									+ "got Bubblan \n");
 
 						} else {
 							return;

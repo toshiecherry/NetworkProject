@@ -15,10 +15,11 @@ public class GameServer {
 		try {
 			server = new ServerSocket(3000);
 			Socket connection = null;
+			CardPiles piles = new CardPiles();
+			GameParticipants participants = new GameParticipants();
+			GameMailbox box = new GameMailbox();
 			while (true) {
-				CardPiles piles = new CardPiles();
-				GameParticipants participants = new GameParticipants();
-				GameMailbox box = new GameMailbox();
+				
 				try {
 					connection = server.accept();
 					Runnable task = new PlayerThread(connection, piles, participants, box);
